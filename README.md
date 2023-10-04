@@ -63,6 +63,20 @@ INIT
 **電圧の印加**：`FETC?`コマンドを利用することで，マルチメータの読み取り値を取得することができます．PyVISAパッケージの`query()`メソッドを利用して値を取得する際，返値は空白を含んだ文字列になることに注意してください．
 
 #### スペクトラムアナライザ (RSA306)
+スペクトラムアナライザ(RSA306)については，実装が複雑であるため，事前に用意されたプログラムである`/lib/rsa306b_spec.py`を利用してかまいません．
+
+`import`文で`rsa306b_spec.py`ファイルを読み込んだ後，以下の`getPeakSpectrum()`関数を利用することで，スペクトル（周波数に対するパワー）とピークの位置を取得することができます．
+
+```python
+# スペクトルの取得
+freq, trace, peakPower, peakFreq = rsa306b_spec.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6, refLevel=-10)
+```
+
+返値は次の通りです．
+- `freq`：周波数（単位：Hz）の配列．`numpy`の`NDArray`形式で格納されています．
+- `trace`：パワー（単位：dBm）の配列．`numpy`の`NDArray`形式で格納されています．
+- `peakPower`：パワーの極大値（単位：dBm）です．
+- `peakFreq`：パワーが極大となるような周波数（単位：Hz）です．
 
 ### 測定データの読み込み・書き出し
 
