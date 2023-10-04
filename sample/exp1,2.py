@@ -1,6 +1,6 @@
 import pyvisa
 import numpy as np
-import rsa306b_spec
+import lib.rsa306b_spec as rsa306b_spec
 import time
 import datetime
 import os
