@@ -79,7 +79,12 @@ freq, trace, peakPower, peakFreq = rsa306b_spec.getPeakSpectrum(startFreq= 4800e
 - `peakFreq`：パワーが極大となるような周波数（単位：Hz）です．
 
 ### 測定データの読み込み・書き出し
+Pythonで測定データをファイルに書き出したり，測定データが記録されたファイルを読み込んだりするには，`open(), read(), write()`などの組み込み関数を利用します．
+
+実験で要求されている測定データの出力形式は任意ですが，カンマ区切り形式（拡張子`.csv`）などを用いると，データを効率的に取り扱うことができて便利です．
 
 ### 測定データのプロット
+測定データをプロットするには，以下の方法があります．
 
-## サンプルプログラム
+- Pythonのライブラリ[matplotlib](https://matplotlib.org/)を利用する
+- gnuplotやMATLABなどのソフトウェアを利用する
