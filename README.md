@@ -89,14 +89,22 @@ PyVISAパッケージの`query()`メソッドを利用して値を取得する�
 ```python
 import lib.rsa306b_spec as rsa 
 # スペクトルの取得
-freq, trace, peakPower, peakFreq = rsa.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6, refLevel=-10)
+freq, trace, peakPower, peakFreq = rsa.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6)
+
+rsa.end()
 ```
+
 
 返値は次の通りです．
 - `freq`：周波数（単位：Hz）の配列．`numpy`の`NDArray`形式で格納されています．
 - `trace`：パワー（単位：dBm）の配列．`numpy`の`NDArray`形式で格納されています．
 - `peakPower`：パワーの極大値（単位：dBm）です．
 - `peakFreq`：パワーが極大となるような周波数（単位：Hz）です．
+
+dBmとmWの関係は次のようになっています．
+$$
+\rm{[dBm]}=10\log_{10}\rm{[mW]}
+$$
 
 ### 測定データの読み込み・書き出し
 Pythonで測定データをファイルに書き出したり，測定データが記録されたファイルを読み込んだりするには，`open(), read(), write()`などの組み込み関数を利用します．
