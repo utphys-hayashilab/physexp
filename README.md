@@ -52,6 +52,8 @@ rm.close()
 
 プログラムの最後では，`close()`メソッドを利用して必ず使用したデバイスとの通信を終了してください．
 
+`query()`メソッドの他に、`write()`メソッドや`read()`メソッドがあります。`write()`は引数に指定した**コマンド**を外部デバイスに送信し，`read()`はデバイスからの返値を返します．
+
 #### ソースメータ (6240A)
 ソースメータ (6240A) を使用する際に必要なコマンドを以下に示します．これ以外のコマンドについては実験室に用意された取扱説明書を参照してください．
 
@@ -91,7 +93,7 @@ import lib.rsa306b_spec as rsa
 # スペクトルの取得
 freq, trace, peakPower, peakFreq = rsa.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6)
 
-rsa.end()
+rsa.end() #close処理
 ```
 
 
