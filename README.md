@@ -87,8 +87,9 @@ PyVISAパッケージの`query()`メソッドを利用して値を取得する�
 `import`文で`rsa306b_spec.py`ファイルを読み込んだ後，以下の`getPeakSpectrum()`関数を利用することで，スペクトル（周波数に対するパワー）とピークの位置を取得することができます．
 
 ```python
+import lib.rsa306b_spec as rsa 
 # スペクトルの取得
-freq, trace, peakPower, peakFreq = rsa306b_spec.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6, refLevel=-10)
+freq, trace, peakPower, peakFreq = rsa.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6, refLevel=-10)
 ```
 
 返値は次の通りです．
