@@ -38,7 +38,7 @@ PyVISAパッケージの詳細な仕様については[PyVISAパッケージの�
 import pyvisa
 
 rm = pyvisa.ResourceManager()
-inst = rm.open_resource('ASRL1::INSTR')
+inst = rm.open_resource('GPIB0::1::INSTR')
 print(inst.query("*IDN?"))
 inst.close()
 rm.close()
@@ -51,6 +51,8 @@ rm.close()
 `query()`メソッドは，引数に指定した**コマンド**を外部デバイスに送信し，デバイスからの返値を返します．5行目では，`inst`変数に格納されたデバイスに対して`*IDN?`というコマンドを送信し，その結果を`print`関数で表示しています（`*IDN?`はデバイスのID番号と呼ばれる識別子を取得するコマンドです）．
 
 プログラムの最後では，`close()`メソッドを利用して必ず使用したデバイスとの通信を終了してください．
+
+`query()`メソッドの他に、`write()`メソッドや`read()`メソッドがあります。`write()`は引数に指定した**コマンド**を外部デバイスに送信し，`read()`はデバイスからの返値を返します．
 
 #### ソースメータ (6240A)
 ソースメータ (6240A) を使用する際に必要なコマンドを以下に示します．これ以外のコマンドについては実験室に用意された取扱説明書を参照してください．
@@ -87,15 +89,24 @@ PyVISAパッケージの`query()`メソッドを利用して値を取得する�
 `import`文で`rsa306b_spec.py`ファイルを読み込んだ後，以下の`getPeakSpectrum()`関数を利用することで，スペクトル（周波数に対するパワー）とピークの位置を取得することができます．
 
 ```python
+import lib.rsa306b_spec as rsa 
 # スペクトルの取得
-freq, trace, peakPower, peakFreq = rsa306b_spec.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6, refLevel=-10)
+freq, trace, peakPower, peakFreq = rsa.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6)
+
+rsa.end() #close処理
 ```
+
 
 返値は次の通りです．
 - `freq`：周波数（単位：Hz）の配列．`numpy`の`NDArray`形式で格納されています．
 - `trace`：パワー（単位：dBm）の配列．`numpy`の`NDArray`形式で格納されています．
 - `peakPower`：パワーの極大値（単位：dBm）です．
 - `peakFreq`：パワーが極大となるような周波数（単位：Hz）です．
+
+dBmとmWの関係は次のようになっています．
+$$
+\rm{[dBm]}=10\log_{10}\rm{[mW]}
+$$
 
 ### 測定データの読み込み・書き出し
 Pythonで測定データをファイルに書き出したり，測定データが記録されたファイルを読み込んだりするには，`open(), read(), write()`などの組み込み関数を利用します．

@@ -46,6 +46,7 @@ timeoutMsec = c_int(1000)      #timeout
 trace = c_int(0)              #select Trace 1
 detector = c_int(1)           #set detector type to max
 span = 40e6                     #max span 
+rl = -10                        #reference level(dBm)
 
 
 #Added to set an external trigger. 
@@ -195,9 +196,9 @@ def getSpectrum(startFreq, endFreq, refLevel):
 
 
 #
-def getPeakSpectrum(startFreq, endFreq, refLevel):
-    _,_,_,peakFreq = getSpectrum(startFreq, endFreq, refLevel)
-    f, t, Pp,Fp =_getSpectrum(centerFreq=peakFreq, refLevel=refLevel)
+def getPeakSpectrum(startFreq, endFreq):
+    _,_,_,peakFreq = getSpectrum(startFreq, endFreq, rl)
+    f, t, Pp,Fp =_getSpectrum(centerFreq=peakFreq, refLevel=rl)
     return f, t, Pp, Fp
     
     
