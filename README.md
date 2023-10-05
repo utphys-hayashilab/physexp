@@ -38,7 +38,7 @@ PyVISAパッケージの詳細な仕様については[PyVISAパッケージの�
 import pyvisa
 
 rm = pyvisa.ResourceManager()
-inst = rm.open_resource('ASRL1::INSTR')
+inst = rm.open_resource('GPIB0::1::INSTR')
 print(inst.query("*IDN?"))
 inst.close()
 rm.close()
