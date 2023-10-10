@@ -102,7 +102,7 @@ def _getSpectrum(centerFreq = 5370e6, refLevel = c_double(0)):
     specSet.rbw = c_double(100e3)               #Resolution BandWidth
     specSet.enableVBW =c_bool(True)             #Set VBW mode enable
     specSet.vbw =c_double(100)                  #Video BandWidth
-    specSet.traceLength = c_int(801)            #num of datapoint
+    specSet.traceLength = c_int(10401)            #num of datapoint
 
 
     
