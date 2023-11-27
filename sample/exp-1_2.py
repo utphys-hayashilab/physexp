@@ -28,8 +28,8 @@ v_source1 = devices[_addr[1]]   #GPIB0::1::INSTRで指定される6240B
 
 def measure():
     freq, trace , peakPower , peakFreq = rsa306b_spec.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6) #startからendまでの周波数範囲でスペクトルを取得
-    trace = np.power(10, trace/10)  #dBmからWに単位変換
-    Pp = np.power(10,peakPower/10)  #dBmからWに単位変換
+    trace = np.power(10, trace/10)  #dBmからmWに単位変換
+    Pp = np.power(10,peakPower/10)  #dBmからmWに単位変換
     p0 = [Pp, peakFreq,1 ]          #Fittingの初期値を設定 param=[a, mu, sigma]
     # rsa306b_spec.plot(freq, trace)  #スペクトルを描画(optional)
     
