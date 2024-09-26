@@ -2,7 +2,7 @@ import pyvisa
 import numpy as np
 import sys
 sys.path.append("../")
-from lib import rsa306b_spec
+import rsa306b_spec
 import time
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
