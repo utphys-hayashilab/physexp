@@ -17,14 +17,7 @@ _addr = {1:'GPIB0::1::INSTR', 2: 'GPIB0::2::INSTR', 3:'GPIB0::3::INSTR'}
 
 #GPIB通信の初期化
 rm = pyvisa.ResourceManager()   #通信用のクラスのインスタンス作成
-visa_list = rm.list_resources() #接続されているデバイスのアドレス一覧を取得
-devices = dict()
-for addr in visa_list:          #取得したアドレス一覧のそれぞれについて
-    inst = rm.open_resource(addr)   #指定したアドレスのデバイスを取得
-    devices[addr] = inst            #辞書型のdevicesに入れてアドレスで呼び出せるように
-    
-#addrで指定
-v_source1 = devices[_addr[1]]   #GPIB0::1::INSTRで指定される6240B
+v_source1 = rm.open_resource('GPIB0::1::INSTR')  #GPIB0::1::INSTRで指定される6240B
 
 def measure():
     freq, trace , peakPower , peakFreq = rsa306b_spec.getPeakSpectrum(startFreq= 4800e6, endFreq = 6000e6) #startからendまでの周波数範囲でスペクトルを取得
@@ -52,7 +45,7 @@ E
 """
 
 v_source1.write(init_cmd_1) #6240Aの初期設定
-v_tune = np.linspace(0, 7, 11)   #掃引する電圧の配列を用意
+v_tune = np.linspace(0, 7, 101)   #掃引する電圧の配列を用意
 
 result = []
 
@@ -71,7 +64,6 @@ np.savetxt(savepath,result,delimiter=',')   #savepathにresultを区切り文字
 #close
 v_source1.write("SOV 0")            #6240Aの出力を0Vに
 v_source1.write("H")                #6240Aの出力をOFFに
-for device in devices.values():     #全ての接続されたデバイスについて
-    device.close()                  #切断処理
+v_source1.close()                  #切断処理
 rm.close()                          #PyVisa停止処理
 rsa306b_spec.end()                  #スペアナも停止、切断
