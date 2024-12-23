@@ -46,7 +46,7 @@ timeoutMsec = c_int(1000)      #timeout
 trace = c_int(0)              #select Trace 1
 detector = c_int(1)           #set detector type to max
 span = 40e6                     #max span 
-rl = -10                        #reference level(dBm)
+rl = 0                        #reference level(dBm)
 
 
 #Added to set an external trigger. 
