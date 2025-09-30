@@ -13,7 +13,7 @@
 
 ## 実装方法
 ### 外部デバイスの制御
-実験に使用する外部デバイス（ソースメータ・マルチメータ等）をPythonを用いて制御するには，[**PyVISA**](https://pypi.org/project/PyVISA/)パッケージを利用することができます． 
+実験に使用する外部デバイス（ソースメータ・マルチメータ等）をPythonを用いて制御するには，[**PyVISA**](https://pypi.org/project/PyVISA/)パッケージを利用することができます．
 
 PyVISAパッケージは，実験に使用する測定機器との通信を行う際のの共通規格であるVISA (Virtual Instrument Software Architecture)を，Pythonから利用できるようにしたものです．
 
